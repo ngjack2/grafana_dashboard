@@ -89,7 +89,19 @@
 				<input type="number" class="gf-form-input width-5" placeholder="0" ng-model="ctrl.panel.yaxis.alignLevel" ng-change="ctrl.render()" ng-model-onblur bs-tooltip="'Alignment of Y-axes are based on this value, starting from Y=0'" data-placement="right">
 			</div>
 		</div>
-
+		
+		<div>
+			<br/>
+			<h5 class="section-heading">Threshold</h5>
+			<gf-form-switch class="gf-form" label="Enable" tooltip="Enable threshold line" label-class="width-6" switch-class="width-5" checked="ctrl.panel.yaxis.threshold" on-change="ctrl.render()"></gf-form-switch>
+			<div class="gf-form" ng-show="ctrl.panel.yaxis.threshold">
+				<label class="gf-form-label width-6">
+					Value
+				</label>
+				<input type="number" class="gf-form-input width-5" placeholder="0" ng-model="ctrl.panel.yaxis.thresholdLevel" ng-change="ctrl.render()" ng-model-onblur bs-tooltip="'value for threshold line'" data-placement="right">
+			</div>
+		</div>
+		
 	</div>
 
 </div>

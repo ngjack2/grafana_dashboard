@@ -38,6 +38,7 @@ import { GraphContextMenuCtrl } from './GraphContextMenuCtrl';
 import { TimeSrv } from 'app/features/dashboard/services/TimeSrv';
 import { ContextSrv } from 'app/core/services/context_srv';
 import { getFieldLinksSupplier } from 'app/features/panel/panellinks/linkSuppliers';
+import { getColorFromHexRgbOrName } from '@grafana/ui';
 
 const LegendWithThemeProvider = provideTheme(Legend);
 
@@ -388,6 +389,14 @@ class GraphElement {
 
     // Populate element
     const options: any = this.buildFlotOptions(this.panel);
+    // plot a line
+    if (_.isNumber(this.panel.yaxis.thresholdLevel)) {
+      const lineColor = 'rgba(237, 46, 24, 0.60)';
+      options.grid.markings.push({
+        yaxis: { from: this.panel.yaxis.thresholdLevel, to: this.panel.yaxis.thresholdLevel },
+        color: getColorFromHexRgbOrName(lineColor),
+      });
+    }
     this.prepareXAxis(options, this.panel);
     this.configureYAxisOptions(this.data, options);
     this.thresholdManager.addFlotOptions(options, this.panel);
